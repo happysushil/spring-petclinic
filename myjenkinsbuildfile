@@ -1,0 +1,27 @@
+pipeline {
+   agent any
+   tools{
+       maven 'maven3'
+       jdk 'jdk8'
+   }
+   stages {
+       stage('HelloSushilCheckOutSCM') {
+         steps {
+            checkout ([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/happysushil/spring-petclinic.git']]])
+         }
+      }
+       
+	   stage('HelloSushilBuildspring') {
+         steps {
+            bat 'mvn clean package'
+         }
+      }
+	  
+	  stage('HelloSushilBuildspring') {
+         steps {
+            bat 'mvn sonar:sonar'
+         }
+      }
+	  
+   }
+}
