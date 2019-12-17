@@ -17,7 +17,7 @@ pipeline {
          }
       }
 	  
-	  stage('HelloSushilBuildspring') {
+	  stage('HelloSushilRunSonar') {
          steps {
             bat 'mvn sonar:sonar'
          }
